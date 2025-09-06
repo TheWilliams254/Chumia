@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     MAIL_SERVER: str
     MAIL_FROM_NAME: str
     MAIL_STARTTLS: bool
+    MAIL_TLS: bool
     MAIL_SSL_TLS: bool
     USE_CREDENTIALS: bool
     VALIDATE_CERTS: bool
