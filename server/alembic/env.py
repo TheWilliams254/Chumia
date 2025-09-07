@@ -7,6 +7,7 @@ import asyncio
 
 from app.db import Base
 from app.models.user import User
+from app.models.product import Product
 from app.core.config.settings import settings  # your config with DATABASE_URL
 
 # Alembic Config object
