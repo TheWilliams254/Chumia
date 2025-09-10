@@ -8,6 +8,10 @@ from sqlalchemy import DateTime, String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
+
+if TYPE_CHECKING:
+    from app.models.media import Media
+    from app.models.product import Product
 class User(Base):
     __tablename__ = "users"
 
@@ -19,3 +23,7 @@ class User(Base):
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
 
     created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.utcnow)
+
+    #relationships
+    product:Mapped[List["Product"]] = relationship(back_populates="user")
+    media: Mapped[List["Media"]] = relationship(back_populates="user")

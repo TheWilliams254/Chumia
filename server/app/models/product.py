@@ -1,10 +1,15 @@
 import uuid
 from datetime import datetime
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, Text, Float, Integer, DateTime, Enum
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, Text, Float, Integer, DateTime, Enum, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from app.db import Base
 import enum
+from typing import List, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.models.user import User
+    from app.models.media import Media
 
 class ItemsCategory(enum.Enum):
     doors = "doors"
@@ -26,3 +31,11 @@ class Product(Base):
     image_url: Mapped[str | None] = mapped_column(String(500))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
     updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), onupdate=datetime.utcnow)
+
+    user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"))
+    #relationships
+    user: Mapped["User"] = relationship("User", back_populates="product")
+    media: Mapped[List["Media"]] = relationship(back_populates="product")
+
+    def __repr__(self):
+        return f"<Product {self.name}>", f"<Product {self.id}>", f"<Product {self.description}>", f"<Product {self.price}>", f"<Product {self.stock}>", f"<Product {self.category}>", f"<Product {self.image_url}>", f"<Product {self.created_at}>", f"<Product {self.updated_at}>"

@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from app.api.auth import router as auth_router
 from app.api.admin import router as admin
 from app.api.product import router as product_router
+from app.api.media import router as media_router
 from app.models import * 
 
 import os
@@ -44,3 +45,4 @@ app.include_router(auth_router, prefix="/api/auth", tags=["Authentication"])
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 app.include_router(admin)
 app.include_router(product_router)
+app.include_router(media_router)

@@ -7,8 +7,8 @@ from app.models.product import Product
 from app.schemas.product import ProductCreate, ProductUpdate
 
 # Create a new product
-async def create_product(db: AsyncSession, product: ProductCreate) -> Product:
-    new_product = Product(**product.dict())
+async def create_product(db: AsyncSession, product_data: ProductCreate, user_id: UUID):
+    new_product = Product(**product_data.dict(), user_id=user_id)
     db.add(new_product)
     await db.commit()
     await db.refresh(new_product)
