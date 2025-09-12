@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "your_default_secret"
     ALGORITHM: str = "HS256"
     FRONTEND_URL: str
+    #Email
     MAIL_USERNAME: str
     MAIL_PASSWORD: str
     MAIL_FROM: str
@@ -18,6 +19,12 @@ class Settings(BaseSettings):
     USE_CREDENTIALS: bool
     VALIDATE_CERTS: bool
     TEST_RECEIVER_EMAIL: str
+    #Mpesa
+    MPESA_CONSUMER_KEY: str
+    MPESA_CONSUMER_SECRET: str
+    MPESA_SHORTCODE: str
+    MPESA_PASSKEY: str
+    MPESA_CALLBACK_URL: str
 
     class Config:
         extra = Extra.forbid  

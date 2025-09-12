@@ -9,6 +9,8 @@ from app.db import Base
 from app.models.user import User
 from app.models.product import Product
 from app.models.media import Media
+from app.models.order import Order
+from app.models.payment import Payment
 from app.core.config.settings import settings 
 
 # Alembic Config object

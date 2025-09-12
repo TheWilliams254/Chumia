@@ -5,6 +5,9 @@ from app.api.auth import router as auth_router
 from app.api.admin import router as admin
 from app.api.product import router as product_router
 from app.api.media import router as media_router
+from app.api.order import router as order_router
+from app.api.payment import router as payment_router
+from app.api.mpesa import router as  mpesa_router
 from app.models import * 
 
 import os
@@ -46,3 +49,6 @@ app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 app.include_router(admin)
 app.include_router(product_router)
 app.include_router(media_router)
+app.include_router(order_router)
+app.include_router(payment_router)
+app.include_router(mpesa_router)

@@ -12,6 +12,8 @@ from app.db import Base
 if TYPE_CHECKING:
     from app.models.media import Media
     from app.models.product import Product
+    from app.models.order import Order
+
 class User(Base):
     __tablename__ = "users"
 
@@ -27,3 +29,4 @@ class User(Base):
     #relationships
     product:Mapped[List["Product"]] = relationship(back_populates="user")
     media: Mapped[List["Media"]] = relationship(back_populates="user")
+    orders: Mapped[List["Order"]] = relationship("Order", back_populates="user")

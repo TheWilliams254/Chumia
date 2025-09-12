@@ -10,6 +10,7 @@ from typing import List, TYPE_CHECKING
 if TYPE_CHECKING:
     from app.models.user import User
     from app.models.media import Media
+    from app.models.order import OrderItem
 
 class ItemsCategory(enum.Enum):
     doors = "doors"
@@ -36,6 +37,9 @@ class Product(Base):
     #relationships
     user: Mapped["User"] = relationship("User", back_populates="product")
     media: Mapped[List["Media"]] = relationship(back_populates="product")
+    order_items: Mapped[List["OrderItem"]] = relationship("OrderItem", back_populates="product")
+
+
 
     def __repr__(self):
         return f"<Product {self.name}>", f"<Product {self.id}>", f"<Product {self.description}>", f"<Product {self.price}>", f"<Product {self.stock}>", f"<Product {self.category}>", f"<Product {self.image_url}>", f"<Product {self.created_at}>", f"<Product {self.updated_at}>"
