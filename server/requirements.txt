@@ -1,3 +1,4 @@
+aiofiles==24.1.0
 aiosmtplib==3.0.2
 alembic==1.14.1
 annotated-types==0.7.0
@@ -6,7 +7,9 @@ async-timeout==5.0.1
 asyncpg==0.30.0
 bcrypt==4.3.0
 blinker==1.8.2
+certifi==2025.8.3
 cffi==1.17.1
+charset-normalizer==3.4.3
 click==8.1.8
 cryptography==45.0.7
 dnspython==2.6.1
@@ -36,6 +39,7 @@ python-dotenv==1.0.1
 python-jose==3.4.0
 python-multipart==0.0.20
 PyYAML==6.0.2
+requests==2.32.5
 rignore==0.6.4
 rsa==4.9.1
 shellingham==1.5.4

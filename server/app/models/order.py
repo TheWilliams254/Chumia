@@ -33,7 +33,7 @@ class Order(Base):
 
     user: Mapped["User"] = relationship("User", back_populates="orders")
     items: Mapped[List["OrderItem"]] = relationship("OrderItem", back_populates="order", cascade="all, delete-orphan")
-
+    payments: Mapped[List["Payment"]] = relationship("Payment", back_populates="order", cascade="all, delete-orphan")
 
 class OrderItem(Base):
     __tablename__ = "order_items"
@@ -46,7 +46,5 @@ class OrderItem(Base):
 
     order: Mapped["Order"] = relationship("Order", back_populates="items")
     product: Mapped["Product"] = relationship("Product", back_populates="order_items")
-    payments: Mapped[list["Payment"]] = relationship("Payment", back_populates="order", cascade="all, delete-orphan")
-
     def __repr__(self):
         return f"OrderItem(id={self.id}, order_id={self.order_id}, product_id={self.product_id}, quantity={self.quantity}, price={self.price})"
