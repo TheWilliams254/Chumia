@@ -1,10 +1,11 @@
+from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 from uuid import UUID
 from app.models.order import Order, OrderItem
 from app.models.product import Product
-from app.schemas.order import OrderCreate, OrderStatusUpdate
+from app.schemas.order import OrderCreate, OrderOut, OrderStatusUpdate
 
 async def create_order(db: AsyncSession, user_id: UUID, order_data: OrderCreate):
     order = Order(user_id=user_id)
@@ -30,7 +31,13 @@ async def create_order(db: AsyncSession, user_id: UUID, order_data: OrderCreate)
     db.add(order)
     await db.commit()
     await db.refresh(order)
-    return order
+
+    # reload order with items eagerly loaded
+    result = await db.execute(
+        select(Order).options(selectinload(Order.items)).where(Order.id == order.id)
+    )
+    return result.scalar_one()
+
 
 async def get_order(db: AsyncSession, order_id: UUID):
     result = await db.execute(
