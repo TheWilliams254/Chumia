@@ -27,9 +27,7 @@ class Settings(BaseSettings):
     MPESA_CALLBACK_URL: str
 
     class Config:
-        extra = Extra.forbid  
+        extra = Extra.forbid
         env_file = ".env"
 
 settings = Settings()
-
-# print("Loaded settings:", settings.dict())
